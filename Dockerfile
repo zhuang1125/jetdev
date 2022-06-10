@@ -20,4 +20,3 @@ RUN apt-get update  && \
     yarn build && \
     cd /root/jetlinks-community/ && \
     ./mvnw clean package -Dmaven.test.skip=true
-
