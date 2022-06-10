@@ -4,7 +4,7 @@ FROM ubuntu:20.04
 RUN apt-get update  && \
     apt-get install curl wget vim git -y && \
     cd /root/ && \
-    wget https://download.oracle.com/otn/java/jdk/8u333-b02/2dee051a5d0647d5be72a7c0abff270e/jdk-8u333-linux-x64.tar.gz?AuthParam=1654846085_52e3d7b535ff004ad50dff7e803539a1  -O /root/jdk-8u333-linux-x64.tar.gz  && \
+    wget https://download.oracle.com/otn/java/jdk/8u333-b02/2dee051a5d0647d5be72a7c0abff270e/jdk-8u333-linux-x64.tar.gz?AuthParam=1654877556_d7d0dc9138bfd90822375ed9ce28d884  -O /root/jdk-8u333-linux-x64.tar.gz  && \
     wget https://registry.npmmirror.com/-/binary/node/latest-v12.x/node-v12.22.10-linux-x64.tar.gz   -O /root/node-v12.22.10-linux-x64.tar.gz   && \
     tar -xzvf jdk-8u333-linux-x64.tar.gz && \
     tar -xzvf node-v12.22.10-linux-x64.tar.gz && \
