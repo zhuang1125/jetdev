@@ -11,11 +11,11 @@ RUN apt-get update  && \
     tar -xzvf node-v12.22.10-linux-x64.tar.gz && \
     git clone https://gitee.com/jetlinks/jetlinks-community.git && \
     git clone https://gitee.com/jetlinks/jetlinks-ui-antd.git     
-RUN echo  'export  JAVA_HOME=/root/jdk1.8.0_321\n\
-export NODEJS_HOME=/root/node-v12.22.10-linux-x64\n\  
-export PATH=$JAVA_HOME/bin:$NODEJS_HOME/bin:$PATH ' >> /etc/profile  && \
-source /etc/profile && \  
-cd /root/jetlinks-ui-antd/  && \
+RUN echo  'export  JAVA_HOME=/root/jdk1.8.0_321' >> /etc/profile && \
+    echo 'export NODEJS_HOME=/root/node-v12.22.10-linux-x64' >> /etc/profile && \  
+    echo 'export PATH=$JAVA_HOME/bin:$NODEJS_HOME/bin:$PATH ' >> /etc/profile  && \
+    source /etc/profile && \
+    cd /root/jetlinks-ui-antd/  && \
     npm set  registry https://registry.npmmirror.com/ && \
     npm install -g yarn && \
     yarn && \
