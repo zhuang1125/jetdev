@@ -1,6 +1,7 @@
 FROM ubuntu:20.04
 #ADD  jdk-8u321-linux-x64.tar.gz /root/  && 
 #ADD  node-v12.22.10-linux-x64.tar.gz /root/ 
+SHELL ["/bin/bash", "-c"]
 RUN apt-get update  && \
     apt-get install curl wget vim git -y && \
     cd /root/ && \
@@ -13,12 +14,12 @@ RUN apt-get update  && \
 RUN echo  'export  JAVA_HOME=/root/jdk1.8.0_321\n\
 export NODEJS_HOME=/root/node-v12.22.10-linux-x64\n\  
 export PATH=$JAVA_HOME/bin:$NODEJS_HOME/bin:$PATH ' >> /etc/profile  && \
-/bin/bash -c 'source /etc/profile'  
-RUN cd /root/jetlinks-ui-antd/  && \
+source /etc/profile && \  
+cd /root/jetlinks-ui-antd/  && \
     npm set  registry https://registry.npmmirror.com/ && \
     npm install -g yarn && \
     yarn && \
-    yarn build
-RUN cd /root/jetlinks-community/ && \
+    yarn build && \
+    cd /root/jetlinks-community/ && \
     ./mvnw clean package -Dmaven.test.skip=true
 
