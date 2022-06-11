@@ -9,8 +9,8 @@ RUN apt-get update  && \
     tar -xzvf jdk-8u321-linux-x64.tar.gz && \
     tar -xzvf node-v12.22.10-linux-x64.tar.gz && \
 echo  'export  JAVA_HOME=/root/jdk1.8.0_321  
-> export NODEJS_HOME=/root/node-v12.22.10-linux-x64  
-> export PATH=$JAVA_HOME/bin:$NODEJS_HOME/bin:$PATH ' >> /etc/profile  && \
+export NODEJS_HOME=/root/node-v12.22.10-linux-x64  
+export PATH=$JAVA_HOME/bin:$NODEJS_HOME/bin:$PATH ' >> /etc/profile  && \
 source /etc/profile  && \
     git clone https://gitee.com/jetlinks/jetlinks-community.git && \
     git clone https://gitee.com/jetlinks/jetlinks-ui-antd.git && \
