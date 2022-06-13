@@ -10,6 +10,7 @@ RUN apt-get update  && \
     wget https://registry.npmmirror.com/-/binary/node/latest-v12.x/node-v12.22.10-linux-x64.tar.gz   -O /root/node-v12.22.10-linux-x64.tar.gz   && \
     tar -xzvf jdk-8u321-linux-x64.tar.gz && \
     tar -xzvf node-v12.22.10-linux-x64.tar.gz && \
+    tar -xzvf apache-maven-3.6.3-bin.tar.gz && \
     git clone https://gitee.com/jetlinks/jetlinks-community.git && \
     git clone https://gitee.com/jetlinks/jetlinks-ui-antd.git && \
     git clone https://github.com/thingsboard/thingsboard.git
