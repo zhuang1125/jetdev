@@ -22,9 +22,11 @@ RUN echo  'export  JAVA_HOME=/root/jdk1.8.0_321' >> /etc/profile && \
     npm set  registry https://registry.npmmirror.com/ && \
     npm install -g yarn && \
     yarn && \
-    yarn build && \
+    yarn build 
+RUN source /etc/profile && \
     cd /root/jetlinks-community/ && \
-    ./mvnw clean package -Dmaven.test.skip=true && \
+    ./mvnw clean package -Dmaven.test.skip=true
+RUN source /etc/profile && \    
     cd /root/thingsboard/ && \
     git checkout release-3.3 && \ 
     mvn license:format && \
@@ -33,7 +35,8 @@ RUN echo  'export  JAVA_HOME=/root/jdk1.8.0_321' >> /etc/profile && \
     mvn license:format && \
     mvn clean install package -DskipTests
 RUN cd /root && wget  https://download.jetbrains.com.cn/idea/gateway/JetBrainsGateway-222.2270.16.exe -O /root/JetBrainsGateway-222.2270.16.exe && \
-    wget https://vscode.cdn.azure.cn/stable/4af164ea3a06f701fe3e89a2bcbb421d2026b68f/VSCode-win32-x64-1.68.0.zip -O /root/VSCode-win32-x64-1.68.0.zip
+    wget https://vscode.cdn.azure.cn/stable/4af164ea3a06f701fe3e89a2bcbb421d2026b68f/VSCode-win32-x64-1.68.0.zip -O /root/VSCode-win32-x64-1.68.0.zip && \
+    wget https://download.jetbrains.com/idea/ideaIU-222.2964.55.tar.gz -O /root/ideaIU-222.2964.55.tar.gz
 RUN apt-get install openssh-client openssh-server  language-pack-zh-hans -y && \
     echo "export LC_ALL=zh_CN.UTF-8">> /etc/profile && \
     sed -i 's/#PermitRootLogin prohibit-password/PermitRootLogin yes/g' /etc/ssh/sshd_config && \
