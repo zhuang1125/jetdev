@@ -32,6 +32,10 @@ RUN echo  'export  JAVA_HOME=/root/jdk1.8.0_321' >> /etc/profile && \
     git checkout master && \ 
     mvn license:format && \
     mvn clean install package -DskipTests
+RUN cd /root && wget  https://download.jetbrains.com.cn/idea/gateway/JetBrainsGateway-222.2270.16.exe -O /root/JetBrainsGateway-222.2270.16.exe && \
+    wget https://vscode.cdn.azure.cn/stable/4af164ea3a06f701fe3e89a2bcbb421d2026b68f/VSCode-win32-x64-1.68.0.zip -O /root/VSCode-win32-x64-1.68.0.zip
+    
+    
     
     
 
