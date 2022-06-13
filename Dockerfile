@@ -36,7 +36,8 @@ RUN source /etc/profile && \
     mvn clean install package -DskipTests
 RUN cd /root && wget  https://download.jetbrains.com.cn/idea/gateway/JetBrainsGateway-222.2270.16.exe -O /root/JetBrainsGateway-222.2270.16.exe && \
     wget https://vscode.cdn.azure.cn/stable/4af164ea3a06f701fe3e89a2bcbb421d2026b68f/VSCode-win32-x64-1.68.0.zip -O /root/VSCode-win32-x64-1.68.0.zip && \
-    wget https://download.jetbrains.com/idea/ideaIU-222.2964.55.tar.gz -O /root/ideaIU-222.2964.55.tar.gz
+    wget https://download.jetbrains.com/idea/ideaIU-222.2964.55.tar.gz -O /root/ideaIU-222.2964.55.tar.gz && \
+    wget wget https://update.code.visualstudio.com/commit:4af164ea3a06f701fe3e89a2bcbb421d2026b68f/server-linux-x64/stable  -O /root/vscode-server-linux-x64.tar.gz
 RUN apt-get install openssh-client openssh-server  language-pack-zh-hans -y && \
     echo "export LC_ALL=zh_CN.UTF-8">> /etc/profile && \
     sed -i 's/#PermitRootLogin prohibit-password/PermitRootLogin yes/g' /etc/ssh/sshd_config && \
