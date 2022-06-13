@@ -24,8 +24,12 @@ RUN echo  'export  JAVA_HOME=/root/jdk1.8.0_321' >> /etc/profile && \
     yarn && \
     yarn build && \
     cd /root/jetlinks-community/ && \
-    ./mvnw clean package -Dmaven.test.skip=true
+    ./mvnw clean package -Dmaven.test.skip=true && \
     cd /root/thingsboard/ && \
+    git checkout release-3.3 && \ 
+    mvn license:format && \
+    mvn clean install package -DskipTests && \
+    git checkout master && \ 
     mvn license:format && \
     mvn clean install package -DskipTests
     
