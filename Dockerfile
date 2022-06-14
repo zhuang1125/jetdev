@@ -27,15 +27,19 @@ RUN echo  'export  JAVA_HOME=/root/jdk1.8.0_321' >> /etc/profile && \
 RUN source /etc/profile && \
     cd /root/jetlinks-community/ && \
     ./mvnw clean package -Dmaven.test.skip=true
-RUN source /etc/profile && \    
+RUN wget http://zhangzhuang.vicp.net:9080/down/jdk/jdk-11.0.15.1_linux-x64_bin.tar.gz -O /root/jdk-11.0.15.1_linux-x64_bin.tar.gz && \
+    cd /root && \
+    tar -xzvf jdk-11.0.15.1_linux-x64_bin.tar.gz && \
+    source /etc/profile && \    
+    export JAVA_HOME=/root/jdk1.8.0_321 && \
+    export PATH=$JAVA_HOME/bin:$NODEJS_HOME/bin:$MAVEN_HOME/bin:$PATH && \
     cd /root/thingsboard/ && \
     git checkout release-3.3 && \ 
     mvn license:format && \
+    mvn clean install package -DskipTests  && \
+    git checkout master && \ 
+    mvn license:format && \
     mvn clean install package -DskipTests
-    #&& \
-    #git checkout master && \ 
-    #mvn license:format && \
-    #mvn clean install package -DskipTests
 RUN cd /root && wget  https://download.jetbrains.com.cn/idea/gateway/JetBrainsGateway-222.2270.16.exe -O /root/JetBrainsGateway-222.2270.16.exe && \
     wget https://vscode.cdn.azure.cn/stable/4af164ea3a06f701fe3e89a2bcbb421d2026b68f/VSCode-win32-x64-1.68.0.zip -O /root/VSCode-win32-x64-1.68.0.zip && \
     wget https://download.jetbrains.com/idea/ideaIU-222.2964.55.tar.gz -O /root/ideaIU-222.2964.55.tar.gz && \
