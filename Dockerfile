@@ -34,9 +34,10 @@ RUN wget http://zhangzhuang.vicp.net:9080/down/jdk/jdk-11.0.15.1_linux-x64_bin.t
     export JAVA_HOME=/root/jdk-11.0.15.1 && \
     export PATH=$JAVA_HOME/bin:$NODEJS_HOME/bin:$MAVEN_HOME/bin:$PATH && \
     cd /root/thingsboard/ && \
-    git checkout release-3.3 && \ 
+    git checkout master && \ 
     mvn license:format && \
     mvn clean install package -DskipTests  && \
+    #git checkout release-3.3 && \
     git checkout master && \ 
     mvn license:format && \
     mvn clean install package -DskipTests
