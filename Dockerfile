@@ -3,7 +3,7 @@ FROM ubuntu:20.04
 #ADD  node-v12.22.10-linux-x64.tar.gz /root/ 
 RUN apt-get update  && \
     apt-get install curl wget vim git -y && \
-RUN apt-get install openssh-client openssh-server  language-pack-zh-hans -y && \
+    apt-get install openssh-client openssh-server  language-pack-zh-hans -y && \
     echo "export LC_ALL=zh_CN.UTF-8">> /etc/profile && \
     sed -i 's/#PermitRootLogin prohibit-password/PermitRootLogin yes/g' /etc/ssh/sshd_config && \
     sed -i 's/PasswordAuthentication no/PasswordAuthentication yes/g' /etc/ssh/sshd_config && \
