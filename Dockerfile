@@ -4,54 +4,370 @@ FROM ubuntu:20.04
 SHELL ["/bin/bash", "-c"]
 RUN apt-get update  && \
     apt-get install curl wget vim git -y && \
-    cd /root/ && \
-    wget http://zhangzhuang.vicp.net:9080/down/jdk-8u333-linux-x64.tar.gz  -O /root/jdk-8u333-linux-x64.tar.gz  && \
-    wget https://archive.apache.org/dist/maven/maven-3/3.6.3/binaries/apache-maven-3.6.3-bin.tar.gz  -O /root/apache-maven-3.6.3-bin.tar.gz  && \
-    wget https://registry.npmmirror.com/-/binary/node/latest-v12.x/node-v12.22.10-linux-x64.tar.gz   -O /root/node-v12.22.10-linux-x64.tar.gz   && \
-    tar -xzvf jdk-8u333-linux-x64.tar.gz && \
-    tar -xzvf node-v12.22.10-linux-x64.tar.gz && \
-    tar -xzvf apache-maven-3.6.3-bin.tar.gz && \
-    git clone https://gitee.com/jetlinks/jetlinks-community.git && \
-    git clone https://gitee.com/jetlinks/jetlinks-ui-antd.git && \
-    git clone https://github.com/thingsboard/thingsboard.git
-RUN echo  'export  JAVA_HOME=/root/jdk1.8.0_333' >> /etc/profile && \
-    echo 'export NODEJS_HOME=/root/node-v12.22.10-linux-x64' >> /etc/profile && \  
-    echo 'export MAVEN_HOME=/root/apache-maven-3.6.3' >> /etc/profile && \ 
-    echo 'export PATH=$JAVA_HOME/bin:$NODEJS_HOME/bin:$MAVEN_HOME/bin:$PATH ' >> /etc/profile  && \
-    source /etc/profile && \
-    cd /root/jetlinks-ui-antd/  && \
-    npm set  registry https://registry.npmmirror.com/ && \
-    npm install -g yarn && \
-    yarn && \
-    yarn build 
-RUN source /etc/profile && \
-    cd /root/jetlinks-community/ && \
-    ./mvnw clean package -Dmaven.test.skip=true
-RUN wget http://zhangzhuang.vicp.net:9080/down/jdk/jdk-11.0.15.1_linux-x64_bin.tar.gz -O /root/jdk-11.0.15.1_linux-x64_bin.tar.gz && \
-    cd /root && \
-    tar -xzvf jdk-11.0.15.1_linux-x64_bin.tar.gz && \
-    source /etc/profile && \    
-    export JAVA_HOME=/root/jdk-11.0.15.1 && \
-    export PATH=$JAVA_HOME/bin:$NODEJS_HOME/bin:$MAVEN_HOME/bin:$PATH && \
-    cd /root/thingsboard/ && \
-    git checkout master && \ 
-    mvn license:format && \
-    mvn clean install package -DskipTests  && \
-    #git checkout release-3.3 && \
-    git checkout master && \ 
-    mvn license:format && \
-    mvn clean install package -DskipTests
-RUN cd /root && wget  https://download.jetbrains.com.cn/idea/gateway/JetBrainsGateway-222.2270.16.exe -O /root/JetBrainsGateway-222.2270.16.exe && \
-    wget https://vscode.cdn.azure.cn/stable/4af164ea3a06f701fe3e89a2bcbb421d2026b68f/VSCode-win32-x64-1.68.0.zip -O /root/VSCode-win32-x64-1.68.0.zip && \
-    wget https://download.jetbrains.com/idea/ideaIU-222.2964.55.tar.gz -O /root/ideaIU-222.2964.55.tar.gz && \
-    wget wget https://update.code.visualstudio.com/commit:4af164ea3a06f701fe3e89a2bcbb421d2026b68f/server-linux-x64/stable  -O /root/vscode-server-linux-x64.tar.gz
 RUN apt-get install openssh-client openssh-server  language-pack-zh-hans -y && \
     echo "export LC_ALL=zh_CN.UTF-8">> /etc/profile && \
     sed -i 's/#PermitRootLogin prohibit-password/PermitRootLogin yes/g' /etc/ssh/sshd_config && \
     sed -i 's/PasswordAuthentication no/PasswordAuthentication yes/g' /etc/ssh/sshd_config && \
     echo '123456' | passwd --stdin root && \
     /etc/init.d/ssh start
-    
+RUN wget https://github.com/esp8266/Arduino/releases/download/3.0.2/esp8266-3.0.2.zip
+RUN wget https://github.com/esp8266/Arduino/releases/download/3.0.1/esp8266-3.0.1.zip
+RUN wget https://github.com/esp8266/Arduino/releases/download/3.0.0/esp8266-3.0.0.zip
+RUN wget https://github.com/esp8266/Arduino/releases/download/2.7.4/esp8266-2.7.4.zip
+RUN wget https://github.com/esp8266/Arduino/releases/download/2.7.3/esp8266-2.7.3.zip
+RUN wget https://github.com/esp8266/Arduino/releases/download/2.7.2/esp8266-2.7.2.zip
+RUN wget https://github.com/esp8266/Arduino/releases/download/2.7.1/esp8266-2.7.1.zip
+RUN wget https://github.com/esp8266/Arduino/releases/download/2.7.0/esp8266-2.7.0.zip
+RUN wget https://github.com/esp8266/Arduino/releases/download/2.6.3/esp8266-2.6.3.zip
+RUN wget https://github.com/esp8266/Arduino/releases/download/2.6.2/esp8266-2.6.2.zip
+RUN wget https://github.com/esp8266/Arduino/releases/download/2.6.1/esp8266-2.6.1.zip
+RUN wget https://github.com/esp8266/Arduino/releases/download/2.6.0/esp8266-2.6.0.zip
+RUN wget https://github.com/esp8266/Arduino/releases/download/2.0.0/esp8266-2.0.0.zip
+RUN wget https://github.com/esp8266/Arduino/releases/download/2.3.0/esp8266-2.3.0.zip
+RUN wget https://github.com/esp8266/Arduino/releases/download/2.2.0/esp8266-2.2.0.zip
+RUN wget https://github.com/esp8266/Arduino/releases/download/2.4.2/esp8266-2.4.2.zip
+RUN wget https://github.com/esp8266/Arduino/releases/download/2.4.1/esp8266-2.4.1.zip
+RUN wget https://github.com/esp8266/Arduino/releases/download/2.4.0/esp8266-2.4.0.zip
+RUN wget https://github.com/esp8266/Arduino/releases/download/2.5.2/esp8266-2.5.2.zip
+RUN wget https://github.com/esp8266/Arduino/releases/download/2.1.0/esp8266-2.1.0.zip
+RUN wget https://github.com/esp8266/Arduino/releases/download/2.5.0/esp8266-2.5.0.zip
+RUN wget https://github.com/esp8266/Arduino/releases/download/2.5.1/esp8266-2.5.1.zip
+RUN wget https://github.com/earlephilhower/esp-quick-toolchain/releases/download/2.5.0-4/python3-3.7.2.post1-embed-win32v2a.zip
+RUN wget https://github.com/earlephilhower/esp-quick-toolchain/releases/download/2.5.0-4/python3-3.7.2.post1-embed-win32v2a.zip
+RUN wget https://github.com/earlephilhower/esp-quick-toolchain/releases/download/2.5.0-4/python3-via-env.tar.gz
+RUN wget https://github.com/earlephilhower/esp-quick-toolchain/releases/download/2.5.0-4/python3-via-env.tar.gz
+RUN wget https://github.com/earlephilhower/esp-quick-toolchain/releases/download/2.5.0-4/python3-via-env.tar.gz
+RUN wget https://github.com/earlephilhower/esp-quick-toolchain/releases/download/2.5.0-4/python3-macosx-portable.tar.gz
+RUN wget https://github.com/earlephilhower/esp-quick-toolchain/releases/download/2.5.0-4/python3-via-env.tar.gz
+RUN wget https://github.com/earlephilhower/esp-quick-toolchain/releases/download/3.0.4-gcc10.3/aarch64-linux-gnu.xtensa-lx106-elf-1757bed.210717.tar.gz
+RUN wget https://github.com/earlephilhower/esp-quick-toolchain/releases/download/3.0.4-gcc10.3/arm-linux-gnueabihf.xtensa-lx106-elf-1757bed.210717.tar.gz
+RUN wget https://github.com/earlephilhower/esp-quick-toolchain/releases/download/3.0.4-gcc10.3/i686-linux-gnu.xtensa-lx106-elf-1757bed.210717.tar.gz
+RUN wget https://github.com/earlephilhower/esp-quick-toolchain/releases/download/3.0.4-gcc10.3/i686-w64-mingw32.xtensa-lx106-elf-1757bed.210717.zip
+RUN wget https://github.com/earlephilhower/esp-quick-toolchain/releases/download/3.0.4-gcc10.3/x86_64-apple-darwin14.xtensa-lx106-elf-1757bed.210717.tar.gz
+RUN wget https://github.com/earlephilhower/esp-quick-toolchain/releases/download/3.0.4-gcc10.3/x86_64-linux-gnu.xtensa-lx106-elf-1757bed.210717.tar.gz
+RUN wget https://github.com/earlephilhower/esp-quick-toolchain/releases/download/3.0.4-gcc10.3/x86_64-w64-mingw32.xtensa-lx106-elf-1757bed.210717.zip
+RUN wget https://github.com/earlephilhower/esp-quick-toolchain/releases/download/3.0.3-gcc10.3/aarch64-linux-gnu.xtensa-lx106-elf-9bcba0b.210606.tar.gz
+RUN wget https://github.com/earlephilhower/esp-quick-toolchain/releases/download/3.0.3-gcc10.3/arm-linux-gnueabihf.xtensa-lx106-elf-9bcba0b.210606.tar.gz
+RUN wget https://github.com/earlephilhower/esp-quick-toolchain/releases/download/3.0.3-gcc10.3/i686-linux-gnu.xtensa-lx106-elf-9bcba0b.210606.tar.gz
+RUN wget https://github.com/earlephilhower/esp-quick-toolchain/releases/download/3.0.3-gcc10.3/i686-w64-mingw32.xtensa-lx106-elf-9bcba0b.210606.zip
+RUN wget https://github.com/earlephilhower/esp-quick-toolchain/releases/download/3.0.3-gcc10.3/x86_64-apple-darwin14.xtensa-lx106-elf-9bcba0b.210606.tar.gz
+RUN wget https://github.com/earlephilhower/esp-quick-toolchain/releases/download/3.0.3-gcc10.3/x86_64-linux-gnu.xtensa-lx106-elf-9bcba0b.210606.tar.gz
+RUN wget https://github.com/earlephilhower/esp-quick-toolchain/releases/download/3.0.3-gcc10.3/x86_64-w64-mingw32.xtensa-lx106-elf-9bcba0b.210606.zip
+RUN wget https://github.com/earlephilhower/esp-quick-toolchain/releases/download/3.0.0-newlib4.0.0-gnu23/aarch64-linux-gnu.xtensa-lx106-elf-48f7b08.210303.tar.gz
+RUN wget https://github.com/earlephilhower/esp-quick-toolchain/releases/download/3.0.0-newlib4.0.0-gnu23/arm-linux-gnueabihf.xtensa-lx106-elf-48f7b08.210303.tar.gz
+RUN wget https://github.com/earlephilhower/esp-quick-toolchain/releases/download/3.0.0-newlib4.0.0-gnu23/i686-linux-gnu.xtensa-lx106-elf-48f7b08.210303.tar.gz
+RUN wget https://github.com/earlephilhower/esp-quick-toolchain/releases/download/3.0.0-newlib4.0.0-gnu23/i686-w64-mingw32.xtensa-lx106-elf-48f7b08.210303.zip
+RUN wget https://github.com/earlephilhower/esp-quick-toolchain/releases/download/3.0.0-newlib4.0.0-gnu23/x86_64-apple-darwin14.xtensa-lx106-elf-48f7b08.210303.tar.gz
+RUN wget https://github.com/earlephilhower/esp-quick-toolchain/releases/download/3.0.0-newlib4.0.0-gnu23/x86_64-linux-gnu.xtensa-lx106-elf-48f7b08.210303.tar.gz
+RUN wget https://github.com/earlephilhower/esp-quick-toolchain/releases/download/3.0.0-newlib4.0.0-gnu23/x86_64-w64-mingw32.xtensa-lx106-elf-48f7b08.210303.zip
+RUN wget https://github.com/earlephilhower/esp-quick-toolchain/releases/download/2.5.0-4/aarch64-linux-gnu.xtensa-lx106-elf-b40a506.1563313032.tar.gz
+RUN wget https://github.com/earlephilhower/esp-quick-toolchain/releases/download/2.5.0-4/arm-linux-gnueabihf.xtensa-lx106-elf-b40a506.1563313032.tar.gz
+RUN wget https://github.com/earlephilhower/esp-quick-toolchain/releases/download/2.5.0-4/i686-linux-gnu.xtensa-lx106-elf-b40a506.1563313032.tar.gz
+RUN wget https://github.com/earlephilhower/esp-quick-toolchain/releases/download/2.5.0-4/i686-w64-mingw32.xtensa-lx106-elf-b40a506.1563313032.zip
+RUN wget https://github.com/earlephilhower/esp-quick-toolchain/releases/download/2.5.0-4/x86_64-apple-darwin14.xtensa-lx106-elf-b40a506.1563313032.tar.gz
+RUN wget https://github.com/earlephilhower/esp-quick-toolchain/releases/download/2.5.0-4/x86_64-linux-gnu.xtensa-lx106-elf-b40a506.1563313032.tar.gz
+RUN wget https://github.com/earlephilhower/esp-quick-toolchain/releases/download/2.5.0-4/x86_64-w64-mingw32.xtensa-lx106-elf-b40a506.1563313032.zip
+RUN wget https://github.com/esp8266/Arduino/releases/download/2.3.0/win32-xtensa-lx106-elf-gb404fb9-2.tar.gz
+RUN wget https://github.com/esp8266/Arduino/releases/download/2.3.0/osx-xtensa-lx106-elf-gb404fb9-2.tar.gz
+RUN wget https://github.com/esp8266/Arduino/releases/download/2.3.0/osx-xtensa-lx106-elf-gb404fb9-2.tar.gz
+RUN wget https://github.com/esp8266/Arduino/releases/download/2.3.0/linux64-xtensa-lx106-elf-gb404fb9.tgz
+RUN wget https://github.com/esp8266/Arduino/releases/download/2.3.0/linux32-xtensa-lx106-elf.tar.gz
+RUN wget https://github.com/esp8266/Arduino/releases/download/2.3.0/linuxarm-xtensa-lx106-elf-g46f160f-2.tar.gz
+RUN wget https://github.com/earlephilhower/esp-quick-toolchain/releases/download/2.5.0-2/aarch64-linux-gnu.xtensa-lx106-elf-59d892c8.tar.gz
+RUN wget https://github.com/earlephilhower/esp-quick-toolchain/releases/download/2.5.0-2/arm-linux-gnueabihf.xtensa-lx106-elf-59d892c8.tar.gz
+RUN wget https://github.com/earlephilhower/esp-quick-toolchain/releases/download/2.5.0-2/i686-w64-mingw32.xtensa-lx106-elf-59d892c8.zip
+RUN wget https://github.com/earlephilhower/esp-quick-toolchain/releases/download/2.5.0-2/x86_64-apple-darwin14.xtensa-lx106-elf-59d892c8.tar.gz
+RUN wget https://github.com/earlephilhower/esp-quick-toolchain/releases/download/2.5.0-2/x86_64-linux-gnu.xtensa-lx106-elf-59d892c8.tar.gz
+RUN wget https://github.com/earlephilhower/esp-quick-toolchain/releases/download/2.5.0-2/x86_64-w64-mingw32.xtensa-lx106-elf-59d892c8.zip
+RUN wget https://github.com/earlephilhower/esp-quick-toolchain/releases/download/2.5.0-3/aarch64-linux-gnu.xtensa-lx106-elf-20ed2b9c.tar.gz
+RUN wget https://github.com/earlephilhower/esp-quick-toolchain/releases/download/2.5.0-3/arm-linux-gnueabihf.xtensa-lx106-elf-20ed2b9c.tar.gz
+RUN wget https://github.com/earlephilhower/esp-quick-toolchain/releases/download/2.5.0-3/i686-w64-mingw32.xtensa-lx106-elf-20ed2b9c.zip
+RUN wget https://github.com/earlephilhower/esp-quick-toolchain/releases/download/2.5.0-3/i686-linux-gnu.xtensa-lx106-elf-1f24aeae.tar.gz
+RUN wget https://github.com/earlephilhower/esp-quick-toolchain/releases/download/2.5.0-3/x86_64-apple-darwin14.xtensa-lx106-elf-20ed2b9c.tar.gz
+RUN wget https://github.com/earlephilhower/esp-quick-toolchain/releases/download/2.5.0-3/x86_64-linux-gnu.xtensa-lx106-elf-20ed2b9c.tar.gz
+RUN wget https://github.com/earlephilhower/esp-quick-toolchain/releases/download/2.5.0-3/x86_64-w64-mingw32.xtensa-lx106-elf-20ed2b9c.zip
+RUN wget http://arduino.esp8266.com/win32-xtensa-lx106-elf-gb404fb9.tar.gz
+RUN wget http://arduino.esp8266.com/osx-xtensa-lx106-elf-gb404fb9-2.tar.gz
+RUN wget http://arduino.esp8266.com/osx-xtensa-lx106-elf-gb404fb9-2.tar.gz
+RUN wget http://arduino.esp8266.com/linux64-xtensa-lx106-elf-gb404fb9.tar.gz
+RUN wget http://arduino.esp8266.com/linux32-xtensa-lx106-elf.tar.gz
+RUN wget https://github.com/earlephilhower/esp-quick-toolchain/releases/download/3.0.4-gcc10.3/aarch64-linux-gnu.mkspiffs-7fefeac.210717.tar.gz
+RUN wget https://github.com/earlephilhower/esp-quick-toolchain/releases/download/3.0.4-gcc10.3/arm-linux-gnueabihf.mkspiffs-7fefeac.210717.tar.gz
+RUN wget https://github.com/earlephilhower/esp-quick-toolchain/releases/download/3.0.4-gcc10.3/i686-linux-gnu.mkspiffs-7fefeac.210717.tar.gz
+RUN wget https://github.com/earlephilhower/esp-quick-toolchain/releases/download/3.0.4-gcc10.3/i686-w64-mingw32.mkspiffs-7fefeac.210717.zip
+RUN wget https://github.com/earlephilhower/esp-quick-toolchain/releases/download/3.0.4-gcc10.3/x86_64-apple-darwin14.mkspiffs-7fefeac.210717.tar.gz
+RUN wget https://github.com/earlephilhower/esp-quick-toolchain/releases/download/3.0.4-gcc10.3/x86_64-linux-gnu.mkspiffs-7fefeac.210717.tar.gz
+RUN wget https://github.com/earlephilhower/esp-quick-toolchain/releases/download/3.0.4-gcc10.3/x86_64-w64-mingw32.mkspiffs-7fefeac.210717.zip
+RUN wget https://github.com/earlephilhower/esp-quick-toolchain/releases/download/3.0.3-gcc10.3/aarch64-linux-gnu.mkspiffs-7fefeac.210606.tar.gz
+RUN wget https://github.com/earlephilhower/esp-quick-toolchain/releases/download/3.0.3-gcc10.3/arm-linux-gnueabihf.mkspiffs-7fefeac.210606.tar.gz
+RUN wget https://github.com/earlephilhower/esp-quick-toolchain/releases/download/3.0.3-gcc10.3/i686-linux-gnu.mkspiffs-7fefeac.210606.tar.gz
+RUN wget https://github.com/earlephilhower/esp-quick-toolchain/releases/download/3.0.3-gcc10.3/i686-w64-mingw32.mkspiffs-7fefeac.210606.zip
+RUN wget https://github.com/earlephilhower/esp-quick-toolchain/releases/download/3.0.3-gcc10.3/x86_64-apple-darwin14.mkspiffs-7fefeac.210606.tar.gz
+RUN wget https://github.com/earlephilhower/esp-quick-toolchain/releases/download/3.0.3-gcc10.3/x86_64-linux-gnu.mkspiffs-7fefeac.210606.tar.gz
+RUN wget https://github.com/earlephilhower/esp-quick-toolchain/releases/download/3.0.3-gcc10.3/x86_64-w64-mingw32.mkspiffs-7fefeac.210606.zip
+RUN wget https://github.com/earlephilhower/esp-quick-toolchain/releases/download/3.0.0-newlib4.0.0-gnu23/aarch64-linux-gnu.mkspiffs-7fefeac.210303.tar.gz
+RUN wget https://github.com/earlephilhower/esp-quick-toolchain/releases/download/3.0.0-newlib4.0.0-gnu23/arm-linux-gnueabihf.mkspiffs-7fefeac.210303.tar.gz
+RUN wget https://github.com/earlephilhower/esp-quick-toolchain/releases/download/3.0.0-newlib4.0.0-gnu23/i686-linux-gnu.mkspiffs-7fefeac.210303.tar.gz
+RUN wget https://github.com/earlephilhower/esp-quick-toolchain/releases/download/3.0.0-newlib4.0.0-gnu23/i686-w64-mingw32.mkspiffs-7fefeac.210303.zip
+RUN wget https://github.com/earlephilhower/esp-quick-toolchain/releases/download/3.0.0-newlib4.0.0-gnu23/x86_64-apple-darwin14.mkspiffs-7fefeac.210303.tar.gz
+RUN wget https://github.com/earlephilhower/esp-quick-toolchain/releases/download/3.0.0-newlib4.0.0-gnu23/x86_64-linux-gnu.mkspiffs-7fefeac.210303.tar.gz
+RUN wget https://github.com/earlephilhower/esp-quick-toolchain/releases/download/3.0.0-newlib4.0.0-gnu23/x86_64-w64-mingw32.mkspiffs-7fefeac.210303.zip
+RUN wget https://github.com/earlephilhower/esp-quick-toolchain/releases/download/2.5.0-4/aarch64-linux-gnu.mkspiffs-7fefeac.1563313032.tar.gz
+RUN wget https://github.com/earlephilhower/esp-quick-toolchain/releases/download/2.5.0-4/arm-linux-gnueabihf.mkspiffs-7fefeac.1563313032.tar.gz
+RUN wget https://github.com/earlephilhower/esp-quick-toolchain/releases/download/2.5.0-4/i686-linux-gnu.mkspiffs-7fefeac.1563313032.tar.gz
+RUN wget https://github.com/earlephilhower/esp-quick-toolchain/releases/download/2.5.0-4/i686-w64-mingw32.mkspiffs-7fefeac.1563313032.zip
+RUN wget https://github.com/earlephilhower/esp-quick-toolchain/releases/download/2.5.0-4/x86_64-apple-darwin14.mkspiffs-7fefeac.1563313032.tar.gz
+RUN wget https://github.com/earlephilhower/esp-quick-toolchain/releases/download/2.5.0-4/x86_64-linux-gnu.mkspiffs-7fefeac.1563313032.tar.gz
+RUN wget https://github.com/earlephilhower/esp-quick-toolchain/releases/download/2.5.0-4/x86_64-w64-mingw32.mkspiffs-7fefeac.1563313032.zip
+RUN wget https://github.com/earlephilhower/esp-quick-toolchain/releases/download/2.5.0-2/aarch64-linux-gnu-mkspiffs-7fefeac.tar.gz
+RUN wget https://github.com/earlephilhower/esp-quick-toolchain/releases/download/2.5.0-2/arm-linux-gnueabihf-mkspiffs-7fefeac.tar.gz
+RUN wget https://github.com/earlephilhower/esp-quick-toolchain/releases/download/2.5.0-2/i686-w64-mingw32-mkspiffs-7fefeac.zip
+RUN wget https://github.com/earlephilhower/esp-quick-toolchain/releases/download/2.5.0-2/x86_64-apple-darwin14-mkspiffs-7fefeac.tar.gz
+RUN wget https://github.com/earlephilhower/esp-quick-toolchain/releases/download/2.5.0-2/x86_64-linux-gnu-mkspiffs-7fefeac.tar.gz
+RUN wget https://github.com/earlephilhower/esp-quick-toolchain/releases/download/2.5.0-2/x86_64-w64-mingw32-mkspiffs-7fefeac.zip
+RUN wget https://github.com/igrr/mkspiffs/releases/download/0.1.2/mkspiffs-0.1.2-windows.zip
+RUN wget https://github.com/igrr/mkspiffs/releases/download/0.1.2/mkspiffs-0.1.2-osx.tar.gz
+RUN wget https://github.com/igrr/mkspiffs/releases/download/0.1.2/mkspiffs-0.1.2-osx.tar.gz
+RUN wget https://github.com/igrr/mkspiffs/releases/download/0.1.2/mkspiffs-0.1.2-linux64.tar.gz
+RUN wget https://github.com/igrr/mkspiffs/releases/download/0.1.2/mkspiffs-0.1.2-linux32.tar.gz
+RUN wget https://github.com/igrr/mkspiffs/releases/download/0.1.2/mkspiffs-0.1.2-linux-armhf.tar.gz
+RUN wget https://github.com/earlephilhower/esp-quick-toolchain/releases/download/2.5.0-3/aarch64-linux-gnu.mkspiffs-7fefeac.tar.gz
+RUN wget https://github.com/earlephilhower/esp-quick-toolchain/releases/download/2.5.0-3/arm-linux-gnueabihf.mkspiffs-7fefeac.tar.gz
+RUN wget https://github.com/earlephilhower/esp-quick-toolchain/releases/download/2.5.0-3/i686-w64-mingw32.mkspiffs-7fefeac.zip
+RUN wget https://github.com/earlephilhower/esp-quick-toolchain/releases/download/2.5.0-3/i686-linux-gnu.mkspiffs-7fefeac.tar.gz
+RUN wget https://github.com/earlephilhower/esp-quick-toolchain/releases/download/2.5.0-3/x86_64-apple-darwin14.mkspiffs-7fefeac.tar.gz
+RUN wget https://github.com/earlephilhower/esp-quick-toolchain/releases/download/2.5.0-3/x86_64-linux-gnu.mkspiffs-7fefeac.tar.gz
+RUN wget https://github.com/earlephilhower/esp-quick-toolchain/releases/download/2.5.0-3/x86_64-w64-mingw32.mkspiffs-7fefeac.zip
+RUN wget https://github.com/igrr/mkspiffs/releases/download/0.2.0/mkspiffs-0.2.0-no_magic_length-windows.zip
+RUN wget https://github.com/igrr/mkspiffs/releases/download/0.2.0/mkspiffs-0.2.0-no_magic_length-osx.tar.gz
+RUN wget https://github.com/igrr/mkspiffs/releases/download/0.2.0/mkspiffs-0.2.0-no_magic_length-osx.tar.gz
+RUN wget https://github.com/igrr/mkspiffs/releases/download/0.2.0/mkspiffs-0.2.0-no_magic_length-linux64.tar.gz
+RUN wget https://github.com/igrr/mkspiffs/releases/download/0.2.0/mkspiffs-0.2.0-no_magic_length-linux32.tar.gz
+RUN wget https://github.com/igrr/mkspiffs/releases/download/0.2.0/mkspiffs-0.2.0-no_magic_length-linux-armhf.tar.gz
+RUN wget https://github.com/earlephilhower/esp-quick-toolchain/releases/download/3.0.4-gcc10.3/aarch64-linux-gnu.mklittlefs-943d2f7.210717.tar.gz
+RUN wget https://github.com/earlephilhower/esp-quick-toolchain/releases/download/3.0.4-gcc10.3/arm-linux-gnueabihf.mklittlefs-943d2f7.210717.tar.gz
+RUN wget https://github.com/earlephilhower/esp-quick-toolchain/releases/download/3.0.4-gcc10.3/i686-linux-gnu.mklittlefs-943d2f7.210717.tar.gz
+RUN wget https://github.com/earlephilhower/esp-quick-toolchain/releases/download/3.0.4-gcc10.3/i686-w64-mingw32.mklittlefs-943d2f7.210717.zip
+RUN wget https://github.com/earlephilhower/esp-quick-toolchain/releases/download/3.0.4-gcc10.3/x86_64-apple-darwin14.mklittlefs-943d2f7.210717.tar.gz
+RUN wget https://github.com/earlephilhower/esp-quick-toolchain/releases/download/3.0.4-gcc10.3/x86_64-linux-gnu.mklittlefs-943d2f7.210717.tar.gz
+RUN wget https://github.com/earlephilhower/esp-quick-toolchain/releases/download/3.0.4-gcc10.3/x86_64-w64-mingw32.mklittlefs-943d2f7.210717.zip
+RUN wget https://github.com/earlephilhower/esp-quick-toolchain/releases/download/3.0.3-gcc10.3/aarch64-linux-gnu.mklittlefs-943d2f7.210606.tar.gz
+RUN wget https://github.com/earlephilhower/esp-quick-toolchain/releases/download/3.0.3-gcc10.3/arm-linux-gnueabihf.mklittlefs-943d2f7.210606.tar.gz
+RUN wget https://github.com/earlephilhower/esp-quick-toolchain/releases/download/3.0.3-gcc10.3/i686-linux-gnu.mklittlefs-943d2f7.210606.tar.gz
+RUN wget https://github.com/earlephilhower/esp-quick-toolchain/releases/download/3.0.3-gcc10.3/i686-w64-mingw32.mklittlefs-943d2f7.210606.zip
+RUN wget https://github.com/earlephilhower/esp-quick-toolchain/releases/download/3.0.3-gcc10.3/x86_64-apple-darwin14.mklittlefs-943d2f7.210606.tar.gz
+RUN wget https://github.com/earlephilhower/esp-quick-toolchain/releases/download/3.0.3-gcc10.3/x86_64-linux-gnu.mklittlefs-943d2f7.210606.tar.gz
+RUN wget https://github.com/earlephilhower/esp-quick-toolchain/releases/download/3.0.3-gcc10.3/x86_64-w64-mingw32.mklittlefs-943d2f7.210606.zip
+RUN wget https://github.com/earlephilhower/esp-quick-toolchain/releases/download/3.0.0-newlib4.0.0-gnu23/aarch64-linux-gnu.mklittlefs-943d2f7.210303.tar.gz
+RUN wget https://github.com/earlephilhower/esp-quick-toolchain/releases/download/3.0.0-newlib4.0.0-gnu23/arm-linux-gnueabihf.mklittlefs-943d2f7.210303.tar.gz
+RUN wget https://github.com/earlephilhower/esp-quick-toolchain/releases/download/3.0.0-newlib4.0.0-gnu23/i686-linux-gnu.mklittlefs-943d2f7.210303.tar.gz
+RUN wget https://github.com/earlephilhower/esp-quick-toolchain/releases/download/3.0.0-newlib4.0.0-gnu23/i686-w64-mingw32.mklittlefs-943d2f7.210303.zip
+RUN wget https://github.com/earlephilhower/esp-quick-toolchain/releases/download/3.0.0-newlib4.0.0-gnu23/x86_64-apple-darwin14.mklittlefs-943d2f7.210303.tar.gz
+RUN wget https://github.com/earlephilhower/esp-quick-toolchain/releases/download/3.0.0-newlib4.0.0-gnu23/x86_64-linux-gnu.mklittlefs-943d2f7.210303.tar.gz
+RUN wget https://github.com/earlephilhower/esp-quick-toolchain/releases/download/3.0.0-newlib4.0.0-gnu23/x86_64-w64-mingw32.mklittlefs-943d2f7.210303.zip
+RUN wget https://github.com/earlephilhower/esp-quick-toolchain/releases/download/2.5.0-4/aarch64-linux-gnu.mklittlefs-fe5bb56.1578453304.tar.gz
+RUN wget https://github.com/earlephilhower/esp-quick-toolchain/releases/download/2.5.0-4/arm-linux-gnueabihf.mklittlefs-fe5bb56.1578453304.tar.gz
+RUN wget https://github.com/earlephilhower/esp-quick-toolchain/releases/download/2.5.0-4/i686-linux-gnu.mklittlefs-fe5bb56.1578453304.tar.gz
+RUN wget https://github.com/earlephilhower/esp-quick-toolchain/releases/download/2.5.0-4/i686-linux-gnu.mklittlefs-7f77f2b.1563313032.tar.gz
+RUN wget https://github.com/earlephilhower/esp-quick-toolchain/releases/download/2.5.0-4/i686-w64-mingw32.mklittlefs-fe5bb56.1578453304.zip
+RUN wget https://github.com/earlephilhower/esp-quick-toolchain/releases/download/2.5.0-4/x86_64-apple-darwin14.mklittlefs-fe5bb56.1578453304.tar.gz
+RUN wget https://github.com/earlephilhower/esp-quick-toolchain/releases/download/2.5.0-4/x86_64-linux-gnu.mklittlefs-fe5bb56.1578453304.tar.gz
+RUN wget https://github.com/earlephilhower/esp-quick-toolchain/releases/download/2.5.0-4/x86_64-w64-mingw32.mklittlefs-fe5bb56.1578453304.zip
+RUN wget https://github.com/earlephilhower/esp-quick-toolchain/releases/download/2.5.0-4/aarch64-linux-gnu-mklittlefs-69bd9e6.tar.gz
+RUN wget https://github.com/earlephilhower/esp-quick-toolchain/releases/download/2.5.0-4/arm-linux-gnueabihf-mklittlefs-69bd9e6.tar.gz
+RUN wget https://github.com/earlephilhower/esp-quick-toolchain/releases/download/2.5.0-4/i686-w64-mingw32-mklittlefs-69bd9e6.zip
+RUN wget https://github.com/earlephilhower/esp-quick-toolchain/releases/download/2.5.0-4/x86_64-apple-darwin14-mklittlefs-69bd9e6.tar.gz
+RUN wget https://github.com/earlephilhower/esp-quick-toolchain/releases/download/2.5.0-4/x86_64-linux-gnu-mklittlefs-69bd9e6.tar.gz
+RUN wget https://github.com/earlephilhower/esp-quick-toolchain/releases/download/2.5.0-4/x86_64-w64-mingw32-mklittlefs-69bd9e6.zip
+RUN wget https://github.com/earlephilhower/esp-quick-toolchain/releases/download/2.5.0-3/python-3.7.2.post1-embed-win32v2.zip
+RUN wget https://github.com/earlephilhower/esp-quick-toolchain/releases/download/2.5.0-3/python-3.7.2.post1-embed-win32v2.zip
+RUN wget https://github.com/earlephilhower/esp-quick-toolchain/releases/download/2.5.0-3/python-placeholder.tar.gz
+RUN wget https://github.com/earlephilhower/esp-quick-toolchain/releases/download/2.5.0-3/python-placeholder.tar.gz
+RUN wget https://github.com/earlephilhower/esp-quick-toolchain/releases/download/2.5.0-3/python-placeholder.tar.gz
+RUN wget https://github.com/earlephilhower/esp-quick-toolchain/releases/download/2.5.0-3/python-placeholder.tar.gz
+RUN wget https://github.com/earlephilhower/esp-quick-toolchain/releases/download/2.5.0-3/python-placeholder.tar.gz
+RUN wget https://github.com/igrr/esptool-ck/releases/download/0.4.13/esptool-0.4.13-win32.zip
+RUN wget https://github.com/igrr/esptool-ck/releases/download/0.4.13/esptool-0.4.13-osx.tar.gz
+RUN wget https://github.com/igrr/esptool-ck/releases/download/0.4.13/esptool-0.4.13-osx.tar.gz
+RUN wget https://github.com/igrr/esptool-ck/releases/download/0.4.13/esptool-0.4.13-linux64.tar.gz
+RUN wget https://github.com/igrr/esptool-ck/releases/download/0.4.13/esptool-0.4.13-linux32.tar.gz
+RUN wget https://github.com/igrr/esptool-ck/releases/download/0.4.13/esptool-0.4.13-linux-armhf.tar.gz
+RUN wget https://github.com/igrr/esptool-ck/releases/download/0.4.12/esptool-0.4.12-win32.zip
+RUN wget https://github.com/igrr/esptool-ck/releases/download/0.4.12/esptool-0.4.12-osx.tar.gz
+RUN wget https://github.com/igrr/esptool-ck/releases/download/0.4.12/esptool-0.4.12-osx.tar.gz
+RUN wget https://github.com/igrr/esptool-ck/releases/download/0.4.12/esptool-0.4.12-linux64.tar.gz
+RUN wget https://github.com/igrr/esptool-ck/releases/download/0.4.12/esptool-0.4.12-linux32.tar.gz
+RUN wget https://github.com/igrr/esptool-ck/releases/download/0.4.12/esptool-0.4.12-linux-armhf.tar.gz
+RUN wget https://github.com/earlephilhower/esp-quick-toolchain/releases/download/2.5.0-3/aarch64-linux-gnu.esptool-f80ae31.tar.gz
+RUN wget https://github.com/earlephilhower/esp-quick-toolchain/releases/download/2.5.0-3/arm-linux-gnueabihf.esptool-f80ae31.tar.gz
+RUN wget https://github.com/earlephilhower/esp-quick-toolchain/releases/download/2.5.0-3/i686-w64-mingw32.esptool-f80ae31.zip
+RUN wget https://github.com/earlephilhower/esp-quick-toolchain/releases/download/2.5.0-3/i686-linux-gnu.esptool-f80ae31.tar.gz
+RUN wget https://github.com/earlephilhower/esp-quick-toolchain/releases/download/2.5.0-3/x86_64-apple-darwin14.esptool-f80ae31.tar.gz
+RUN wget https://github.com/earlephilhower/esp-quick-toolchain/releases/download/2.5.0-3/x86_64-linux-gnu.esptool-f80ae31.tar.gz
+RUN wget https://github.com/earlephilhower/esp-quick-toolchain/releases/download/2.5.0-3/x86_64-w64-mingw32.esptool-f80ae31.zip
+RUN wget https://github.com/igrr/esptool-ck/releases/download/0.4.9/esptool-0.4.9-win32.zip
+RUN wget https://github.com/igrr/esptool-ck/releases/download/0.4.9/esptool-0.4.9-osx.tar.gz
+RUN wget https://github.com/igrr/esptool-ck/releases/download/0.4.9/esptool-0.4.9-osx.tar.gz
+RUN wget https://github.com/igrr/esptool-ck/releases/download/0.4.9/esptool-0.4.9-linux64.tar.gz
+RUN wget https://github.com/igrr/esptool-ck/releases/download/0.4.9/esptool-0.4.9-linux32.tar.gz
+RUN wget https://github.com/igrr/esptool-ck/releases/download/0.4.9/esptool-0.4.9-linux-armhf.tar.gz
+RUN wget https://github.com/igrr/esptool-ck/releases/download/0.4.8/esptool-0.4.8-win32.zip
+RUN wget https://github.com/igrr/esptool-ck/releases/download/0.4.8/esptool-0.4.8-osx.tar.gz
+RUN wget https://github.com/igrr/esptool-ck/releases/download/0.4.8/esptool-0.4.8-osx.tar.gz
+RUN wget https://github.com/igrr/esptool-ck/releases/download/0.4.8/esptool-0.4.8-linux64.tar.gz
+RUN wget https://github.com/igrr/esptool-ck/releases/download/0.4.8/esptool-0.4.8-linux32.tar.gz
+RUN wget https://github.com/igrr/esptool-ck/releases/download/0.4.8/esptool-0.4.8-linux-armhf.tar.gz
+RUN wget https://github.com/earlephilhower/esp-quick-toolchain/releases/download/2.5.0-2/aarch64-linux-gnu-esptool-f80ae31.tar.gz
+RUN wget https://github.com/earlephilhower/esp-quick-toolchain/releases/download/2.5.0-2/arm-linux-gnueabihf-esptool-f80ae31.tar.gz
+RUN wget https://github.com/earlephilhower/esp-quick-toolchain/releases/download/2.5.0-2/i686-w64-mingw32-esptool-f80ae31.zip
+RUN wget https://github.com/earlephilhower/esp-quick-toolchain/releases/download/2.5.0-2/x86_64-apple-darwin14-esptool-f80ae31.tar.gz
+RUN wget https://github.com/earlephilhower/esp-quick-toolchain/releases/download/2.5.0-2/x86_64-linux-gnu-esptool-f80ae31.tar.gz
+RUN wget https://github.com/earlephilhower/esp-quick-toolchain/releases/download/2.5.0-2/x86_64-w64-mingw32-esptool-f80ae31.zip
+RUN wget https://github.com/igrr/esptool-ck/releases/download/0.4.5/esptool-0.4.5-win32.zip
+RUN wget https://github.com/igrr/esptool-ck/releases/download/0.4.5/esptool-0.4.5-osx.tar.gz
+RUN wget http://arduino.esp8266.com/esptool-0.4.5-1-gfaa5794-osx.tar.gz
+RUN wget https://github.com/igrr/esptool-ck/releases/download/0.4.5/esptool-0.4.5-linux64.tar.gz
+RUN wget https://github.com/igrr/esptool-ck/releases/download/0.4.5/esptool-0.4.5-linux32.tar.gz
+RUN wget https://github.com/igrr/esptool-ck/releases/download/0.4.6/esptool-0.4.6-win32.zip
+RUN wget https://github.com/igrr/esptool-ck/releases/download/0.4.6/esptool-0.4.6-osx.tar.gz
+RUN wget https://github.com/igrr/esptool-ck/releases/download/0.4.6/esptool-0.4.6-osx.tar.gz
+RUN wget https://github.com/igrr/esptool-ck/releases/download/0.4.6/esptool-0.4.6-linux64.tar.gz
+RUN wget https://github.com/igrr/esptool-ck/releases/download/0.4.6/esptool-0.4.6-linux32.tar.gz
+RUN wget https://github.com/espressif/arduino-esp32/releases/download/2.0.4/esp32-2.0.4.zip
+RUN wget https://github.com/espressif/arduino-esp32/releases/download/2.0.3/esp32-2.0.3.zip
+RUN wget https://github.com/espressif/arduino-esp32/releases/download/2.0.2/esp32-2.0.2.zip
+RUN wget https://github.com/espressif/arduino-esp32/releases/download/2.0.1/esp32-2.0.1.zip
+RUN wget https://github.com/espressif/arduino-esp32/releases/download/2.0.0/esp32-2.0.0.zip
+RUN wget https://github.com/espressif/arduino-esp32/releases/download/1.0.6/esp32-1.0.6.zip
+RUN wget https://github.com/espressif/arduino-esp32/releases/download/1.0.5/esp32-1.0.5.zip
+RUN wget https://github.com/espressif/arduino-esp32/releases/download/1.0.4/esp32-1.0.4.zip
+RUN wget https://github.com/espressif/arduino-esp32/releases/download/1.0.3/esp32-1.0.3.zip
+RUN wget https://github.com/espressif/arduino-esp32/releases/download/1.0.2/esp32-1.0.2.zip
+RUN wget https://github.com/espressif/arduino-esp32/releases/download/1.0.1/esp32-1.0.1.zip
+RUN wget https://github.com/espressif/arduino-esp32/releases/download/1.0.0/esp32-1.0.0.zip
+RUN wget https://github.com/espressif/crosstool-NG/releases/download/esp-2021r2-patch3/riscv32-esp-elf-gcc8_4_0-esp-2021r2-patch3-linux-amd64.tar.gz
+RUN wget https://github.com/espressif/crosstool-NG/releases/download/esp-2021r2-patch3/riscv32-esp-elf-gcc8_4_0-esp-2021r2-patch3-linux-arm64.tar.gz
+RUN wget https://github.com/espressif/crosstool-NG/releases/download/esp-2021r2-patch3/riscv32-esp-elf-gcc8_4_0-esp-2021r2-patch3-linux-armel.tar.gz
+RUN wget https://github.com/espressif/crosstool-NG/releases/download/esp-2021r2-patch3/riscv32-esp-elf-gcc8_4_0-esp-2021r2-patch3-linux-i686.tar.gz
+RUN wget https://github.com/espressif/crosstool-NG/releases/download/esp-2021r2-patch3/riscv32-esp-elf-gcc8_4_0-esp-2021r2-patch3-macos.tar.gz
+RUN wget https://github.com/espressif/crosstool-NG/releases/download/esp-2021r2-patch3/riscv32-esp-elf-gcc8_4_0-esp-2021r2-patch3-win32.zip
+RUN wget https://github.com/espressif/crosstool-NG/releases/download/esp-2021r2-patch3/riscv32-esp-elf-gcc8_4_0-esp-2021r2-patch3-win64.zip
+RUN wget https://github.com/espressif/crosstool-NG/releases/download/esp-2021r2/riscv32-esp-elf-gcc8_4_0-esp-2021r2-linux-amd64.tar.gz
+RUN wget https://github.com/espressif/crosstool-NG/releases/download/esp-2021r2/riscv32-esp-elf-gcc8_4_0-esp-2021r2-linux-arm64.tar.gz
+RUN wget https://github.com/espressif/crosstool-NG/releases/download/esp-2021r2/riscv32-esp-elf-gcc8_4_0-esp-2021r2-linux-armel.tar.gz
+RUN wget https://github.com/espressif/crosstool-NG/releases/download/esp-2021r2/riscv32-esp-elf-gcc8_4_0-esp-2021r2-linux-i686.tar.gz
+RUN wget https://github.com/espressif/crosstool-NG/releases/download/esp-2021r2/riscv32-esp-elf-gcc8_4_0-esp-2021r2-macos.tar.gz
+RUN wget https://github.com/espressif/crosstool-NG/releases/download/esp-2021r2/riscv32-esp-elf-gcc8_4_0-esp-2021r2-win32.zip
+RUN wget https://github.com/espressif/crosstool-NG/releases/download/esp-2021r2/riscv32-esp-elf-gcc8_4_0-esp-2021r2-win64.zip
+RUN wget https://github.com/espressif/crosstool-NG/releases/download/esp-2021r1/riscv32-esp-elf-gcc8_4_0-esp-2021r1-linux-amd64.tar.gz
+RUN wget https://github.com/espressif/crosstool-NG/releases/download/esp-2021r1/riscv32-esp-elf-gcc8_4_0-esp-2021r1-linux-armel.tar.gz
+RUN wget https://github.com/espressif/crosstool-NG/releases/download/esp-2021r1/riscv32-esp-elf-gcc8_4_0-esp-2021r1-linux-i686.tar.gz
+RUN wget https://github.com/espressif/crosstool-NG/releases/download/esp-2021r1/riscv32-esp-elf-gcc8_4_0-esp-2021r1-macos.tar.gz
+RUN wget https://github.com/espressif/crosstool-NG/releases/download/esp-2021r1/riscv32-esp-elf-gcc8_4_0-esp-2021r1-win32.zip
+RUN wget https://github.com/espressif/crosstool-NG/releases/download/esp-2021r2-patch3/xtensa-esp32-elf-gcc8_4_0-esp-2021r2-patch3-linux-amd64.tar.gz
+RUN wget https://github.com/espressif/crosstool-NG/releases/download/esp-2021r2-patch3/xtensa-esp32-elf-gcc8_4_0-esp-2021r2-patch3-linux-arm64.tar.gz
+RUN wget https://github.com/espressif/crosstool-NG/releases/download/esp-2021r2-patch3/xtensa-esp32-elf-gcc8_4_0-esp-2021r2-patch3-linux-armel.tar.gz
+RUN wget https://github.com/espressif/crosstool-NG/releases/download/esp-2021r2-patch3/xtensa-esp32-elf-gcc8_4_0-esp-2021r2-patch3-linux-i686.tar.gz
+RUN wget https://github.com/espressif/crosstool-NG/releases/download/esp-2021r2-patch3/xtensa-esp32-elf-gcc8_4_0-esp-2021r2-patch3-macos.tar.gz
+RUN wget https://github.com/espressif/crosstool-NG/releases/download/esp-2021r2-patch3/xtensa-esp32-elf-gcc8_4_0-esp-2021r2-patch3-win32.zip
+RUN wget https://github.com/espressif/crosstool-NG/releases/download/esp-2021r2-patch3/xtensa-esp32-elf-gcc8_4_0-esp-2021r2-patch3-win64.zip
+RUN wget https://github.com/espressif/crosstool-NG/releases/download/esp-2021r2/xtensa-esp32-elf-gcc8_4_0-esp-2021r2-linux-amd64.tar.gz
+RUN wget https://github.com/espressif/crosstool-NG/releases/download/esp-2021r2/xtensa-esp32-elf-gcc8_4_0-esp-2021r2-linux-arm64.tar.gz
+RUN wget https://github.com/espressif/crosstool-NG/releases/download/esp-2021r2/xtensa-esp32-elf-gcc8_4_0-esp-2021r2-linux-armel.tar.gz
+RUN wget https://github.com/espressif/crosstool-NG/releases/download/esp-2021r2/xtensa-esp32-elf-gcc8_4_0-esp-2021r2-linux-i686.tar.gz
+RUN wget https://github.com/espressif/crosstool-NG/releases/download/esp-2021r2/xtensa-esp32-elf-gcc8_4_0-esp-2021r2-macos.tar.gz
+RUN wget https://github.com/espressif/crosstool-NG/releases/download/esp-2021r2/xtensa-esp32-elf-gcc8_4_0-esp-2021r2-win32.zip
+RUN wget https://github.com/espressif/crosstool-NG/releases/download/esp-2021r2/xtensa-esp32-elf-gcc8_4_0-esp-2021r2-win64.zip
+RUN wget https://github.com/espressif/crosstool-NG/releases/download/esp-2021r1/xtensa-esp32-elf-gcc8_4_0-esp-2021r1-linux-amd64.tar.gz
+RUN wget https://github.com/espressif/crosstool-NG/releases/download/esp-2021r1/xtensa-esp32-elf-gcc8_4_0-esp-2021r1-linux-armel.tar.gz
+RUN wget https://github.com/espressif/crosstool-NG/releases/download/esp-2021r1/xtensa-esp32-elf-gcc8_4_0-esp-2021r1-linux-i686.tar.gz
+RUN wget https://github.com/espressif/crosstool-NG/releases/download/esp-2021r1/xtensa-esp32-elf-gcc8_4_0-esp-2021r1-macos.tar.gz
+RUN wget https://github.com/espressif/crosstool-NG/releases/download/esp-2021r1/xtensa-esp32-elf-gcc8_4_0-esp-2021r1-win32.zip
+RUN wget https://github.com/espressif/arduino-esp32/releases/download/1.0.5-rc5/xtensa-esp32-elf-win32-1.22.0-97-gc752ad5-5.2.0.zip
+RUN wget https://github.com/espressif/arduino-esp32/releases/download/1.0.5-rc5/xtensa-esp32-elf-macos-1.22.0-97-gc752ad5-5.2.0.tar.gz
+RUN wget https://github.com/espressif/arduino-esp32/releases/download/1.0.5-rc5/xtensa-esp32-elf-linux64-1.22.0-97-gc752ad5-5.2.0.tar.gz
+RUN wget https://github.com/espressif/arduino-esp32/releases/download/1.0.5-rc5/xtensa-esp32-elf-linux32-1.22.0-97-gc752ad5-5.2.0.tar.gz
+RUN wget https://github.com/espressif/arduino-esp32/releases/download/1.0.5-rc5/xtensa-esp32-elf-linux-armel-1.22.0-97-gc752ad5-5.2.0.tar.gz
+RUN wget https://github.com/espressif/arduino-esp32/releases/download/1.0.5-rc5/xtensa-esp32-elf-linux-armel-1.22.0-97-gc752ad5-5.2.0.tar.gz
+RUN wget https://dl.espressif.com/dl/xtensa-esp32-elf-win32-1.22.0-80-g6c4433a-5.2.0.zip
+RUN wget https://dl.espressif.com/dl/xtensa-esp32-elf-osx-1.22.0-80-g6c4433a-5.2.0.tar.gz
+RUN wget https://dl.espressif.com/dl/xtensa-esp32-elf-linux64-1.22.0-80-g6c4433a-5.2.0.tar.gz
+RUN wget https://dl.espressif.com/dl/xtensa-esp32-elf-linux32-1.22.0-80-g6c4433a-5.2.0.tar.gz
+RUN wget https://dl.espressif.com/dl/xtensa-esp32-elf-linux-armel-1.22.0-87-gb57bad3-5.2.0.tar.gz
+RUN wget https://github.com/espressif/crosstool-NG/releases/download/esp-2021r2-patch3/xtensa-esp32s2-elf-gcc8_4_0-esp-2021r2-patch3-linux-amd64.tar.gz
+RUN wget https://github.com/espressif/crosstool-NG/releases/download/esp-2021r2-patch3/xtensa-esp32s2-elf-gcc8_4_0-esp-2021r2-patch3-linux-arm64.tar.gz
+RUN wget https://github.com/espressif/crosstool-NG/releases/download/esp-2021r2-patch3/xtensa-esp32s2-elf-gcc8_4_0-esp-2021r2-patch3-linux-armel.tar.gz
+RUN wget https://github.com/espressif/crosstool-NG/releases/download/esp-2021r2-patch3/xtensa-esp32s2-elf-gcc8_4_0-esp-2021r2-patch3-linux-i686.tar.gz
+RUN wget https://github.com/espressif/crosstool-NG/releases/download/esp-2021r2-patch3/xtensa-esp32s2-elf-gcc8_4_0-esp-2021r2-patch3-macos.tar.gz
+RUN wget https://github.com/espressif/crosstool-NG/releases/download/esp-2021r2-patch3/xtensa-esp32s2-elf-gcc8_4_0-esp-2021r2-patch3-win32.zip
+RUN wget https://github.com/espressif/crosstool-NG/releases/download/esp-2021r2-patch3/xtensa-esp32s2-elf-gcc8_4_0-esp-2021r2-patch3-win64.zip
+RUN wget https://github.com/espressif/crosstool-NG/releases/download/esp-2021r2/xtensa-esp32s2-elf-gcc8_4_0-esp-2021r2-linux-amd64.tar.gz
+RUN wget https://github.com/espressif/crosstool-NG/releases/download/esp-2021r2/xtensa-esp32s2-elf-gcc8_4_0-esp-2021r2-linux-arm64.tar.gz
+RUN wget https://github.com/espressif/crosstool-NG/releases/download/esp-2021r2/xtensa-esp32s2-elf-gcc8_4_0-esp-2021r2-linux-armel.tar.gz
+RUN wget https://github.com/espressif/crosstool-NG/releases/download/esp-2021r2/xtensa-esp32s2-elf-gcc8_4_0-esp-2021r2-linux-i686.tar.gz
+RUN wget https://github.com/espressif/crosstool-NG/releases/download/esp-2021r2/xtensa-esp32s2-elf-gcc8_4_0-esp-2021r2-macos.tar.gz
+RUN wget https://github.com/espressif/crosstool-NG/releases/download/esp-2021r2/xtensa-esp32s2-elf-gcc8_4_0-esp-2021r2-win32.zip
+RUN wget https://github.com/espressif/crosstool-NG/releases/download/esp-2021r2/xtensa-esp32s2-elf-gcc8_4_0-esp-2021r2-win64.zip
+RUN wget https://github.com/espressif/crosstool-NG/releases/download/esp-2021r1/xtensa-esp32s2-elf-gcc8_4_0-esp-2021r1-linux-amd64.tar.gz
+RUN wget https://github.com/espressif/crosstool-NG/releases/download/esp-2021r1/xtensa-esp32s2-elf-gcc8_4_0-esp-2021r1-linux-armel.tar.gz
+RUN wget https://github.com/espressif/crosstool-NG/releases/download/esp-2021r1/xtensa-esp32s2-elf-gcc8_4_0-esp-2021r1-linux-i686.tar.gz
+RUN wget https://github.com/espressif/crosstool-NG/releases/download/esp-2021r1/xtensa-esp32s2-elf-gcc8_4_0-esp-2021r1-macos.tar.gz
+RUN wget https://github.com/espressif/crosstool-NG/releases/download/esp-2021r1/xtensa-esp32s2-elf-gcc8_4_0-esp-2021r1-win32.zip
+RUN wget https://github.com/espressif/crosstool-NG/releases/download/esp-2021r2-patch3/xtensa-esp32s3-elf-gcc8_4_0-esp-2021r2-patch3-linux-amd64.tar.gz
+RUN wget https://github.com/espressif/crosstool-NG/releases/download/esp-2021r2-patch3/xtensa-esp32s3-elf-gcc8_4_0-esp-2021r2-patch3-linux-arm64.tar.gz
+RUN wget https://github.com/espressif/crosstool-NG/releases/download/esp-2021r2-patch3/xtensa-esp32s3-elf-gcc8_4_0-esp-2021r2-patch3-linux-armel.tar.gz
+RUN wget https://github.com/espressif/crosstool-NG/releases/download/esp-2021r2-patch3/xtensa-esp32s3-elf-gcc8_4_0-esp-2021r2-patch3-linux-i686.tar.gz
+RUN wget https://github.com/espressif/crosstool-NG/releases/download/esp-2021r2-patch3/xtensa-esp32s3-elf-gcc8_4_0-esp-2021r2-patch3-macos.tar.gz
+RUN wget https://github.com/espressif/crosstool-NG/releases/download/esp-2021r2-patch3/xtensa-esp32s3-elf-gcc8_4_0-esp-2021r2-patch3-win32.zip
+RUN wget https://github.com/espressif/crosstool-NG/releases/download/esp-2021r2-patch3/xtensa-esp32s3-elf-gcc8_4_0-esp-2021r2-patch3-win64.zip
+RUN wget https://github.com/espressif/arduino-esp32/releases/download/2.0.2/esptool-3.3-windows.zip
+RUN wget https://github.com/espressif/arduino-esp32/releases/download/2.0.2/esptool-3.3-windows.zip
+RUN wget https://github.com/espressif/arduino-esp32/releases/download/2.0.2/esptool-3.3-macos.tar.gz
+RUN wget https://github.com/espressif/arduino-esp32/releases/download/2.0.2/esptool-3.3-linux.tar.gz
+RUN wget https://github.com/espressif/arduino-esp32/releases/download/2.0.2/esptool-3.3-linux.tar.gz
+RUN wget https://github.com/espressif/arduino-esp32/releases/download/2.0.2/esptool-3.3-linux.tar.gz
+RUN wget https://github.com/espressif/arduino-esp32/releases/download/2.0.2/esptool-3.3-linux.tar.gz
+RUN wget https://github.com/espressif/arduino-esp32/releases/download/2.0.0-alpha1/esptool-3.1.0-windows.zip
+RUN wget https://github.com/espressif/arduino-esp32/releases/download/2.0.0-alpha1/esptool-3.1.0-macos.tar.gz
+RUN wget https://github.com/espressif/arduino-esp32/releases/download/2.0.0-alpha1/esptool-3.1.0-linux.tar.gz
+RUN wget https://github.com/espressif/arduino-esp32/releases/download/2.0.0-alpha1/esptool-3.1.0-linux.tar.gz
+RUN wget https://github.com/espressif/arduino-esp32/releases/download/2.0.0-alpha1/esptool-3.1.0-linux.tar.gz
+RUN wget https://github.com/espressif/arduino-esp32/releases/download/2.0.0-alpha1/esptool-3.1.0-linux.tar.gz
+RUN wget https://github.com/espressif/arduino-esp32/releases/download/1.0.5-rc5/esptool-3.0.0.2-windows.zip
+RUN wget https://github.com/espressif/arduino-esp32/releases/download/1.0.5-rc5/esptool-3.0.0.2-macos.tar.gz
+RUN wget https://github.com/espressif/arduino-esp32/releases/download/1.0.5-rc5/esptool-3.0.0.2-linux.tar.gz
+RUN wget https://github.com/espressif/arduino-esp32/releases/download/1.0.5-rc5/esptool-3.0.0.2-linux.tar.gz
+RUN wget https://github.com/espressif/arduino-esp32/releases/download/1.0.5-rc5/esptool-3.0.0.2-linux.tar.gz
+RUN wget https://github.com/espressif/arduino-esp32/releases/download/1.0.5-rc5/esptool-3.0.0.2-linux.tar.gz
+RUN wget https://dl.espressif.com/dl/esptool-2.6.1-windows.zip
+RUN wget https://dl.espressif.com/dl/esptool-2.6.1-macos.tar.gz
+RUN wget https://dl.espressif.com/dl/esptool-2.6.1-linux.tar.gz
+RUN wget https://dl.espressif.com/dl/esptool-2.6.1-linux.tar.gz
+RUN wget https://dl.espressif.com/dl/esptool-2.6.1-linux.tar.gz
+RUN wget https://dl.espressif.com/dl/esptool-2.6.0-windows.zip
+RUN wget https://dl.espressif.com/dl/esptool-2.6.0-macos.tar.gz
+RUN wget https://dl.espressif.com/dl/esptool-2.6.0-linux.tar.gz
+RUN wget https://dl.espressif.com/dl/esptool-2.6.0-linux.tar.gz
+RUN wget https://dl.espressif.com/dl/esptool-2.6.0-linux.tar.gz
+RUN wget https://github.com/earlephilhower/esp-quick-toolchain/releases/download/3.0.0-gnu12/aarch64-linux-gnu.mklittlefs-c41e51a.200706.tar.gz
+RUN wget https://github.com/earlephilhower/esp-quick-toolchain/releases/download/3.0.0-gnu12/arm-linux-gnueabihf.mklittlefs-c41e51a.200706.tar.gz
+RUN wget https://github.com/earlephilhower/esp-quick-toolchain/releases/download/3.0.0-gnu12/i686-linux-gnu.mklittlefs-c41e51a.200706.tar.gz
+RUN wget https://github.com/earlephilhower/esp-quick-toolchain/releases/download/3.0.0-gnu12/i686-w64-mingw32.mklittlefs-c41e51a.200706.zip
+RUN wget https://github.com/earlephilhower/esp-quick-toolchain/releases/download/3.0.0-gnu12/x86_64-apple-darwin14.mklittlefs-c41e51a.200706.tar.gz
+RUN wget https://github.com/earlephilhower/esp-quick-toolchain/releases/download/3.0.0-gnu12/x86_64-linux-gnu.mklittlefs-c41e51a.200706.tar.gz
+RUN wget https://github.com/earlephilhower/esp-quick-toolchain/releases/download/3.0.0-gnu12/x86_64-w64-mingw32.mklittlefs-c41e51a.200706.zip
+RUN wget https://github.com/igrr/mkspiffs/releases/download/0.2.3/mkspiffs-0.2.3-arduino-esp32-win32.zip
+RUN wget https://github.com/igrr/mkspiffs/releases/download/0.2.3/mkspiffs-0.2.3-arduino-esp32-osx.tar.gz
+RUN wget https://github.com/igrr/mkspiffs/releases/download/0.2.3/mkspiffs-0.2.3-arduino-esp32-osx.tar.gz
+RUN wget https://github.com/igrr/mkspiffs/releases/download/0.2.3/mkspiffs-0.2.3-arduino-esp32-linux64.tar.gz
+RUN wget https://github.com/igrr/mkspiffs/releases/download/0.2.3/mkspiffs-0.2.3-arduino-esp32-linux32.tar.gz
+RUN wget https://github.com/igrr/mkspiffs/releases/download/0.2.3/mkspiffs-0.2.3-arduino-esp32-linux-armhf.tar.gz
+RUN wget https://github.com/igrr/mkspiffs/releases/download/0.2.3/mkspiffs-0.2.3-arduino-esp32-linux-armhf.tar.gz
+RUN wget https://dl.espressif.com/dl/esptool-2.3.1-windows.zip
+RUN wget https://dl.espressif.com/dl/esptool-2.3.1-macos.tar.gz
+RUN wget https://dl.espressif.com/dl/esptool-2.3.1-linux.tar.gz
+RUN wget https://dl.espressif.com/dl/esptool-2.3.1-linux.tar.gz
+RUN wget https://dl.espressif.com/dl/esptool-2.3.1-linux.tar.gz
     
     
     
