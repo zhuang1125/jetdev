@@ -1,7 +1,6 @@
 FROM ubuntu:20.04
 #ADD  jdk-8u333-linux-x64.tar.gz /root/  && 
 #ADD  node-v12.22.10-linux-x64.tar.gz /root/ 
-SHELL ["/bin/bash", "-c"]
 RUN apt-get update  && \
     apt-get install curl wget vim git -y && \
 RUN apt-get install openssh-client openssh-server  language-pack-zh-hans -y && \
