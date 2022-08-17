@@ -1,13 +1,15 @@
 FROM ubuntu:20.04
+ARG DEBIAN_FRONTEND=noninteractive
+ENV TZ=Asia/Shanghai
 #ADD  jdk-8u333-linux-x64.tar.gz /root/  && 
 #ADD  node-v12.22.10-linux-x64.tar.gz /root/ 
-RUN apt-get update  && \
+RUN cd /etc/apt && sed -i "s/archive.ubuntu.com/mirrors.aliyun.com/g" /etc/apt/sources.list &&  apt-get update  && \
     apt-get install curl wget vim git -y && \
     apt-get install openssh-client openssh-server  language-pack-zh-hans -y && \
     echo "export LC_ALL=zh_CN.UTF-8">> /etc/profile && \
     sed -i 's/#PermitRootLogin prohibit-password/PermitRootLogin yes/g' /etc/ssh/sshd_config && \
     sed -i 's/PasswordAuthentication no/PasswordAuthentication yes/g' /etc/ssh/sshd_config && \
-    echo '123456' | passwd --stdin root && \
+    #echo '123456' | passwd --stdin root && \
     /etc/init.d/ssh start
 RUN wget https://github.com/esp8266/Arduino/releases/download/3.0.2/esp8266-3.0.2.zip
 RUN wget https://github.com/esp8266/Arduino/releases/download/3.0.1/esp8266-3.0.1.zip
